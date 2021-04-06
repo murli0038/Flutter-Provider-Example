@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app/Models/Product.dart';
 import 'package:shop_app/Widgets/ProductsGrid.dart';
 import 'package:shop_app/providers/products_provider.dart';
 
