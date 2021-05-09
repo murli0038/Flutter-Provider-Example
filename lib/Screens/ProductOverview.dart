@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/Screens/CartScreen.dart';
+import 'package:shop_app/Widgets/AppDrawer.dart';
+import 'package:shop_app/Widgets/Badge.dart';
 import 'package:shop_app/Widgets/ProductsGrid.dart';
-import 'package:shop_app/providers/products_provider.dart';
+import '../providers/cart_provider.dart';
 
 // ignore: must_be_immutable
 class ProductOverview extends StatefulWidget {
@@ -16,8 +19,10 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget build(BuildContext context) {
-    final products = Provider.of<Products>(context,listen: false);
+    // final products = Provider.of<Products>(context,listen: false);
+    // final cart = Provider.of<Cart>(context,listen: false);
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text("MY SHOP"),
         actions: <Widget>[
@@ -38,7 +43,17 @@ class _ProductOverviewState extends State<ProductOverview> {
                }
              });
             },
-          )
+          ),
+          Consumer<Cart>(builder: (context, cart, ch) => Badge(
+            child: ch,
+            value: cart.itemCount.toString(),),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: (){
+                Navigator.pushNamed(context, CartScreen.routeName);
+              },
+            ),
+          ),
         ],
       ),
       body: ProductsGrid(showFav: _showFavOnly,),
